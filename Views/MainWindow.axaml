@@ -1,0 +1,68 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:RRT3SaveManager.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:micon="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
+        mc:Ignorable="d" 
+        Width="350"
+        SizeToContent="Height"
+        x:Class="RRT3SaveManager.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="RRT3SaveManager">
+
+    <Design.DataContext>
+        <vm:MainWindowViewModel/>
+    </Design.DataContext>
+
+    <Window.Resources>
+        <vm:EqualsConverter x:Key="EqualsConverter"/>
+        <vm:NotEqualsConverter x:Key="NotEqualsConverter"/>
+    </Window.Resources>
+
+    <StackPanel Margin="10">
+        <TextBlock Text="RRT3 Save Manager" FontSize="20" Margin="0, 0, 0, 20" HorizontalAlignment="Center"/>
+
+        <Button x:Name="SaveGameFolderButton"
+            Content="{Binding FormattedFolderPath}"
+            Margin="0,0,0,5"
+            HorizontalAlignment="Stretch"
+            HorizontalContentAlignment="Center"
+            Command="{Binding OpenFolderDialogCommand}"/>
+
+        <Separator Margin="0,0,0,5"/>
+
+        <ListBox x:Name="SaveGamesListBox" MaxHeight="250" ItemsSource="{Binding SaveGameFiles}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid ColumnDefinitions="*,Auto" Margin="0,0,0,2" Height="54">
+                        <TextBlock x:Name="FileNameTextBlock" Text="{Binding .}" VerticalAlignment="Center" Background="Transparent" PointerPressed="FileNameTextBlock_PointerPressed"/>
+                        <Button Grid.Column="1" Margin="5,0,0,0" VerticalAlignment="Center"
+                            Command="{Binding $parent[Window].DataContext.DeleteFileCommand}"
+                            CommandParameter="{Binding .}"
+                            IsVisible="{Binding $parent[ListBoxItem].IsPointerOver}">
+                            <TextBlock FontFamily="{StaticResource MaterialSymbols}" FontSize="16">delete</TextBlock>
+                        </Button>
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <Grid ColumnDefinitions="*,Auto,Auto" Margin="0,10,0,0"
+              IsVisible="{Binding IsRenamingFile, Converter={StaticResource NotEqualsConverter}, ConverterParameter={x:Null}}">
+            <TextBox Text="{Binding RenamingFileNewName, UpdateSourceTrigger=PropertyChanged}" 
+                     VerticalAlignment="Center"/>
+            <Button Grid.Column="1" Margin="5,0,0,0"
+                    VerticalAlignment="Center"
+                    Command="{Binding ConfirmRenameCommand}">
+                <TextBlock FontFamily="{StaticResource MaterialSymbols}" FontSize="16">check_small</TextBlock>
+            </Button>
+            <Button Grid.Column="2" Margin="5,0,0,0"
+                    VerticalAlignment="Center"
+                    Command="{Binding CancelRenameCommand}">
+                <TextBlock FontFamily="{StaticResource MaterialSymbols}" FontSize="16">close</TextBlock>
+            </Button>
+        </Grid>
+    </StackPanel>
+</Window>
