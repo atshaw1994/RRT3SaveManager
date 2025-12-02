@@ -76,3 +76,4 @@
 /home/aaron/programming/RRT3SaveManager/bin/Debug/net9.0/MsBox.Avalonia.dll
 /home/aaron/programming/RRT3SaveManager/bin/Debug/net9.0/Material.Icons.dll
 /home/aaron/programming/RRT3SaveManager/bin/Debug/net9.0/Material.Icons.Avalonia.dll
+/home/aaron/programming/RRT3SaveManager/obj/Debug/net9.0/RRT3SaveManager.sourcelink.json
