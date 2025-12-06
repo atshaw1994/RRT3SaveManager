@@ -9,7 +9,7 @@
         SizeToContent="Height"
         x:Class="RRT3SaveManager.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
-        Icon="/Assets/avalonia-logo.ico"
+        Icon="/Assets/RRT3SaveManager.ico"
         Title="RRT3SaveManager">
 
     <Design.DataContext>

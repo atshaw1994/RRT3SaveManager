@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("RRT3SaveManager")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+387f4365aebb75557791aafd64bb3b3ca8920ef9")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ff2af14af399a122bf3a826c479fa6f4fbdb0472")]
 [assembly: System.Reflection.AssemblyProductAttribute("RRT3SaveManager")]
 [assembly: System.Reflection.AssemblyTitleAttribute("RRT3SaveManager")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
