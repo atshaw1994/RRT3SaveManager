@@ -1,6 +1,7 @@
 ﻿<Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:ic="using:FluentIcons.Avalonia"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:vm="clr-namespace:RailroadTycoon3SaveManager.ViewModels"
         xmlns:views="clr-namespace:RailroadTycoon3SaveManager.Views"
@@ -11,7 +12,8 @@
         Title="Railroad Tycoon 3 Save Manager"
         Width="380"
         MinWidth="380" SizeToContent="WidthAndHeight"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen"
+        Background="{StaticResource SystemControlBackgroundChromeMediumBrush}">
 
     <Design.DataContext>
         <vm:MainViewModel/>
@@ -20,10 +22,13 @@
     <Grid RowDefinitions="Auto, *">
         
         <!-- HEADER / DIRECTORY BAR -->
-        <Border Grid.Row="0" Padding="16">
+        <Border Margin="16,16,16,8" 
+                Padding="12" 
+                Background="{StaticResource SystemControlBackgroundChromeMediumLowBrush}"
+                CornerRadius="6">
             <Grid ColumnDefinitions="*, Auto">
-                <StackPanel Grid.Column="0" VerticalAlignment="Center" Margin="0,0,12,0">
-                    <TextBlock Text="Save Directory" FontSize="11"  Margin="0,0,0,4"/>
+                <StackPanel VerticalAlignment="Center" Margin="0,0,12,0">
+                    <TextBlock Text="Save Directory" FontSize="11" Margin="0,0,0,4"/>
                     <TextBlock Text="{Binding SaveDirectory, Converter={StaticResource PathDisplayFormatter}}"
                                FontSize="14" 
                                FontWeight="Bold" 
@@ -31,30 +36,32 @@
                 </StackPanel>
                 
                 <Button Grid.Column="1" 
-                        Content="Browse..." 
+                        CornerRadius="6"
                         Command="{Binding BrowseCommand}" 
-                        VerticalAlignment="Center"/>
+                        VerticalAlignment="Center">
+                    <ic:FluentIcon Icon="FolderOpen" />
+                </Button>
             </Grid>
         </Border>
 
         <!-- SAVE GAMES LIST -->
-        <ScrollViewer Grid.Row="1" Padding="16">
-            <ListBox ItemsSource="{Binding SaveGames}">
-                <ListBox.ItemTemplate>
-                    <DataTemplate x:DataType="vm:SaveGameViewModel">
-                        <views:SaveGameControl />
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-                
-                <!-- Disable default selection highlighting for a clean list feel -->
-                <ListBox.Styles>
-                    <Style Selector="ListBoxItem">
-                        <Setter Property="Padding" Value="0"/>
-                        <Setter Property="Margin" Value="0"/>
-                    </Style>
-                </ListBox.Styles>
-            </ListBox>
-        </ScrollViewer>
+        <ListBox Grid.Row="1"
+                 ItemsSource="{Binding SaveGames}" 
+                 Margin="16,0,16,16"
+                 CornerRadius="6">
+            <ListBox.ItemTemplate>
+                <DataTemplate x:DataType="vm:SaveGameViewModel">
+                    <views:SaveGameControl />
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+            
+            <ListBox.Styles>
+                <Style Selector="ListBoxItem">
+                    <Setter Property="Padding" Value="0"/>
+                    <Setter Property="Margin" Value="0"/>
+                </Style>
+            </ListBox.Styles>
+        </ListBox>
         
     </Grid>
 </Window>
