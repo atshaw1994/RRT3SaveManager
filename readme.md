@@ -2,6 +2,8 @@
 
 A simple Avalonia-based save game manager for Railroad Tycoon 3 (RRT3).
 
+<img src="RailroadTycoon3SaveManager/Assets/Screenshot.png" alt="RailroadTycoon3SaveManager" />
+
 ## Features
 - Select and persist a save game folder (remembered across sessions)
 - List `.gmc` save game files in the selected folder
