@@ -1,0 +1,21 @@
+﻿<Application xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="using:RailroadTycoon3SaveManager"
+             xmlns:helpers="clr-namespace:RailroadTycoon3SaveManager.Helpers"
+             x:Class="RailroadTycoon3SaveManager.App"
+             RequestedThemeVariant="Dark">
+             <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
+
+    <Application.DataTemplates>
+        <local:ViewLocator />
+    </Application.DataTemplates>
+
+    <Application.Styles>
+        <FluentTheme />
+    </Application.Styles>
+
+    <Application.Resources>
+        <helpers:PathDisplayFormatter x:Key="PathDisplayFormatter" />
+        <helpers:ItemIndexToCornerRadiusConverter x:Key="ItemIndexToCornerRadiusConverter" Radius="6" />
+    </Application.Resources>
+</Application>

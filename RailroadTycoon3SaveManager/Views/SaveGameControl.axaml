@@ -1,0 +1,87 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:RailroadTycoon3SaveManager.ViewModels"
+             xmlns:ic="using:FluentIcons.Avalonia"
+             mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="50"
+             x:Class="RailroadTycoon3SaveManager.Views.SaveGameControl"
+             x:DataType="vm:SaveGameViewModel"
+             x:Name="RootControl">
+
+    <UserControl.Styles>
+        <!-- Hide action buttons by default -->
+        <Style Selector="StackPanel.action-buttons">
+            <Setter Property="Opacity" Value="0" />
+            <Setter Property="Transitions">
+                <Transitions>
+                    <DoubleTransition Property="Opacity" Duration="0:0:0.1" />
+                </Transitions>
+            </Setter>
+        </Style>
+
+        <!-- Show action buttons when the parent container is hovered -->
+        <Style Selector="Border#ItemBorder:pointerover StackPanel.action-buttons">
+            <Setter Property="Opacity" Value="1" />
+        </Style>
+    </UserControl.Styles>
+
+    <Border x:Name="ItemBorder"
+            Padding="12,8" 
+            Margin="0,2"
+            Background="Transparent"
+            CornerRadius="{Binding $parent[ListBoxItem], Converter={StaticResource ItemIndexToCornerRadiusConverter}}">
+        <Grid ColumnDefinitions="*, Auto">
+            
+            <!-- READ MODE -->
+            <StackPanel Grid.Column="0" 
+                        Orientation="Horizontal" 
+                        VerticalAlignment="Center"
+                        IsVisible="{Binding !IsEditing}">
+                <TextBlock Text="{Binding FileName}" 
+                           FontSize="14" 
+                           FontWeight="Medium" 
+                           VerticalAlignment="Center"/>
+            </StackPanel>
+
+            <!-- EDIT / RENAME MODE -->
+            <Grid ColumnDefinitions="*, Auto, Auto" 
+                  IsVisible="{Binding IsEditing}">
+                <TextBox x:Name="FileNameTextBox" 
+                         Text="{Binding FileName, Mode=OneWay}" 
+                         Margin="0,0,8,0"
+                         VerticalAlignment="Center"/>
+                
+                <Button Grid.Column="1" 
+                        Command="{Binding RenameFileCommand}" 
+                        CommandParameter="{Binding Text, ElementName=FileNameTextBox}"
+                        Margin="0,0,4,0">
+                    <ic:FluentIcon Icon="Checkmark" Width="16" Height="16"/>
+                </Button>
+                
+                <Button Grid.Column="2" 
+                        Command="{Binding CancelRenameCommand}">
+                    <ic:FluentIcon Icon="Dismiss" Width="16" Height="16"/>
+                </Button>
+            </Grid>
+
+            <!-- ACTION BUTTONS -->
+            <StackPanel Grid.Column="1" 
+                        Classes="action-buttons"
+                        Orientation="Horizontal" 
+                        Spacing="6" 
+                        VerticalAlignment="Center"
+                        IsVisible="{Binding !IsEditing}">
+                <Button Command="{Binding BeginRenameCommand}">
+                    <ic:FluentIcon Icon="Pen" Width="16" Height="16"/>
+                </Button>
+                <Button Command="{Binding DuplicateFileCommand}">
+                    <ic:FluentIcon Icon="Copy" Width="16" Height="16"/>
+                </Button>
+                <Button Command="{Binding DeleteFileCommand}" Foreground="#FF5555">
+                    <ic:FluentIcon Icon="Delete" Width="16" Height="16"/>
+                </Button>
+            </StackPanel>
+        </Grid>
+    </Border>
+</UserControl>
