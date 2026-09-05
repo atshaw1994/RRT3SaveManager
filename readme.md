@@ -1,4 +1,4 @@
-# RRT3SaveManager
+# <img src="RailroadTycoon3SaveManager/Assets/rrt3sm.ico" alt="Icon" width="32"/> RRT3SaveManager
 
 A simple Avalonia-based save game manager for Railroad Tycoon 3 (RRT3).
 
